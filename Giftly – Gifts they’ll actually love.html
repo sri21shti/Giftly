@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Giftly – Gifts they’ll actually love</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;800&family=DM+Sans:wght@400;500;700&family=Bagel+Fat+One&family=Caveat:wght@600;700&display=swap">
+<style>
+:root{--bg:#fff6ee;--card:#ffffff;--ink:#2a1f2d;--mute:#7a6a78;--line:#f0dfd0;--accent:#ff5d73;--accent2:#ffb347;--chip:#ffe8d6;--on:#ffffff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1c1520;--card:#2a2030;--ink:#fbeee4;--mute:#b8a5b5;--line:#41344a;--accent:#ff7487;--accent2:#ffb347;--chip:#3a2d42;--on:#1c1520}}
+:root[data-theme="dark"]{--bg:#1c1520;--card:#2a2030;--ink:#fbeee4;--mute:#b8a5b5;--line:#41344a;--accent:#ff7487;--accent2:#ffb347;--chip:#3a2d42;--on:#1c1520}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"DM Sans",system-ui,sans-serif;line-height:1.5}
+.wrap{max-width:720px;margin:0 auto;padding:28px 18px 60px}
+h1{font-family:"Fraunces",Georgia,serif;font-size:clamp(2rem,7vw,3rem);margin:0 0 6px;line-height:1.1}
+h1 span{color:var(--accent)}
+.sub{color:var(--mute);margin:0 0 24px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;margin-bottom:18px}
+label{display:block;font-weight:700;font-size:.9rem;margin:16px 0 6px}
+label:first-child{margin-top:0}
+.hint{font-weight:400;color:var(--mute)}
+input,select,textarea{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:10px 12px}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--accent);border-color:transparent}
+textarea{min-height:76px;resize:vertical}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:480px){.row{grid-template-columns:1fr}}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid var(--line);background:var(--chip);color:var(--ink);border-radius:999px;padding:6px 14px;font:inherit;font-size:.9rem;cursor:pointer}
+.chip.on{background:var(--accent);color:var(--on);border-color:var(--accent);font-weight:700}
+.go{width:100%;margin-top:20px;border:0;border-radius:14px;padding:14px;font:inherit;font-weight:700;font-size:1.05rem;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent2));cursor:pointer}
+.go:disabled{opacity:.6;cursor:wait}
+.msg{text-align:center;color:var(--mute);padding:20px}
+.err{color:var(--accent);text-align:center;padding:12px}
+.gift h3{font-family:"Fraunces",Georgia,serif;margin:0 0 4px;font-size:1.25rem}
+.tag{display:inline-block;background:var(--chip);border-radius:999px;padding:2px 10px;font-size:.78rem;font-weight:700;margin-right:6px}
+.price{color:var(--mute);font-size:.9rem}
+.gift p{margin:10px 0 12px}
+.links a{display:inline-block;margin-right:8px;margin-bottom:4px;padding:6px 12px;border-radius:10px;border:1.5px solid var(--line);color:var(--ink);text-decoration:none;font-size:.85rem;font-weight:700}
+.links a:hover{border-color:var(--accent);color:var(--accent)}
+body{background:var(--bg) radial-gradient(circle at 20px 20px,rgba(255,93,115,.2) 3px,transparent 4px) 0 0/40px 40px}
+h1{font-family:'Bagel Fat One','Fraunces',cursive;font-weight:400;transform:rotate(-2deg);text-shadow:3px 3px 0 var(--accent2)}
+label{letter-spacing:.2px}
+.card{border:2.5px solid var(--ink);box-shadow:6px 6px 0 var(--ink);border-radius:22px}
+.gift:nth-child(odd){transform:rotate(-.5deg)}
+.gift:nth-child(even){transform:rotate(.5deg)}
+.gift h3{font-family:'Bagel Fat One','Fraunces',cursive;font-weight:400}
+.chip{border:2px solid var(--ink);box-shadow:2px 2px 0 var(--ink);font-weight:700;transition:transform .12s}
+.chip:hover{transform:translate(-1px,-1px) rotate(-2deg)}
+.chip.on{transform:rotate(-2deg)}
+.go{border:2.5px solid var(--ink);box-shadow:5px 5px 0 var(--ink);font-family:'Bagel Fat One',sans-serif;font-weight:400;letter-spacing:.5px;transition:transform .1s,box-shadow .1s}
+.go:active{transform:translate(4px,4px);box-shadow:1px 1px 0 var(--ink)}
+.tag{background:var(--accent2);color:#2a1f2d;border:1.5px solid var(--ink)}
+.links a{border:2px solid var(--ink);box-shadow:2px 2px 0 var(--ink)}
+.note-toggle{width:100%;margin-top:22px;padding:14px;border:2.5px dashed var(--ink);border-radius:14px;background:var(--chip);color:var(--ink);font:inherit;font-weight:700;cursor:pointer}
+.note-toggle.on{background:var(--accent2);color:#2a1f2d;border-style:solid}
+#nPanel{margin-top:6px}
+.noteblk{margin-top:12px}
+.nhint{color:var(--mute);font-size:.85rem;margin:8px 0}
+.dlb{border:2px solid var(--ink);box-shadow:2px 2px 0 var(--ink);background:var(--chip);color:var(--ink);border-radius:10px;padding:6px 12px;font:inherit;font-size:.85rem;font-weight:700;cursor:pointer}
+.qhead{display:flex;justify-content:space-between;align-items:center;margin:2px 0 4px;gap:10px}
+.qtitle{font-family:'Bagel Fat One','Fraunces',cursive;font-size:1.2rem}
+.shuf{border:2px solid var(--ink);box-shadow:2px 2px 0 var(--ink);background:var(--accent2);color:#2a1f2d;border-radius:10px;padding:6px 12px;font:inherit;font-size:.85rem;font-weight:700;cursor:pointer}
+.shuf:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--ink)}
+.hero{display:flex;justify-content:center;margin:-4px 0 16px}
+.hero svg{overflow:visible;max-width:100%;height:auto}
+.hero *{transform-box:fill-box;transform-origin:center}
+.gb-sh{fill:var(--ink);opacity:.18;animation:gbsh 2.4s ease-in-out infinite}
+.gb-body,.gb-lidr{fill:var(--accent);stroke:var(--ink);stroke-width:3}
+.gb-rib,.gb-bow,.gb-knot{fill:var(--accent2);stroke:var(--ink);stroke-width:3;stroke-linejoin:round}
+.gb-bounce{animation:gbb 2.4s ease-in-out infinite}
+.gb-lid{transform-origin:left bottom;animation:gbl 2.4s ease-in-out infinite}
+.gb-star{font-size:24px;fill:var(--accent2);stroke:var(--ink);stroke-width:1;animation:gbt 1.6s ease-in-out infinite}
+.cf{opacity:0;animation:cff 2.4s ease-in infinite;animation-delay:var(--d)}
+@keyframes gbb{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes gbsh{0%,100%{transform:scaleX(1)}50%{transform:scaleX(.8);opacity:.1}}
+@keyframes gbl{0%,60%,100%{transform:none}75%{transform:translate(0,-18px) rotate(-9deg)}}
+@keyframes gbt{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.5) rotate(20deg);opacity:.5}}
+@keyframes cff{0%,68%{opacity:0;transform:translateY(0) rotate(0)}72%{opacity:1;transform:translateY(-22px) rotate(60deg)}100%{opacity:0;transform:translateY(70px) rotate(320deg)}}
+@media (prefers-reduced-motion:reduce){.hero *{animation:none!important}.cf{opacity:0}}
+.joy{background:var(--accent2);color:#2a1f2d;border:2.5px solid var(--ink);box-shadow:4px 4px 0 var(--ink);border-radius:16px;padding:10px 14px;margin:0 0 18px;font-weight:700;transform:rotate(-.6deg)}
+.joy b{display:block;font-family:'Bagel Fat One',cursive;font-weight:400;font-size:1.05rem}
+.human h2{font-family:'Bagel Fat One','Fraunces',cursive;font-weight:400;margin:0 0 4px}
+#hOut{margin-top:10px}
+.wrap{position:relative;z-index:1}
+body.ghibli{background:linear-gradient(#9fd8ff,#e8f7ff 65%,#fff3d6) fixed}
+body.ghibli::before{content:'';position:fixed;inset:0;pointer-events:none;opacity:.85;background-repeat:repeat-x;background-size:1100px 100%;animation:ghcloud 140s linear infinite;background-image:radial-gradient(ellipse 90px 28px at 120px 90px,#fff 62%,transparent 64%),radial-gradient(ellipse 60px 22px at 80px 100px,#fff 62%,transparent 64%),radial-gradient(ellipse 70px 24px at 170px 102px,#fff 62%,transparent 64%),radial-gradient(ellipse 110px 32px at 700px 190px,#fff 62%,transparent 64%),radial-gradient(ellipse 70px 24px at 650px 200px,#fff 62%,transparent 64%),radial-gradient(ellipse 80px 26px at 760px 202px,#fff 62%,transparent 64%)}
+body.ghibli::after{content:'';position:fixed;left:0;right:0;bottom:0;height:150px;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 150' preserveAspectRatio='none'%3E%3Cpath d='M0 95Q200 20 430 85T820 75T1200 60V150H0Z' fill='%2388c98a'/%3E%3Cpath d='M0 125Q300 65 600 115T1200 100V150H0Z' fill='%2362b06a'/%3E%3C/svg%3E") bottom/100% 100% no-repeat}
+@keyframes ghcloud{from{background-position:0 0}to{background-position:-1100px 0}}
+@media (prefers-color-scheme:dark){body.ghibli{background:linear-gradient(#10243a,#1d4a5a 70%,#24503f) fixed}body.ghibli::before{opacity:.3}}
+@media (prefers-reduced-motion:reduce){body.ghibli::before{animation:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Giftly <span>♥</span></h1>
+  <p class="sub">Tap a few things about them. Get gifts that actually hit. 🎉</p>
+  <div class="hero" aria-hidden="true">
+    <svg viewBox="0 0 300 190" width="270" height="171">
+      <ellipse class="gb-sh" cx="150" cy="178" rx="72" ry="9"/>
+      <g class="gb-bounce">
+        <rect class="gb-body" x="95" y="98" width="110" height="76" rx="8"/>
+        <rect class="gb-rib" x="141" y="98" width="18" height="76"/>
+        <g class="gb-lid">
+          <rect class="gb-lidr" x="87" y="76" width="126" height="26" rx="8"/>
+          <rect class="gb-rib" x="141" y="76" width="18" height="26"/>
+          <path class="gb-bow" d="M150 76 C118 38 98 72 150 76 C202 72 182 38 150 76 Z"/>
+          <circle class="gb-knot" cx="150" cy="75" r="6"/>
+        </g>
+      </g>
+      <rect class="cf" x="112" y="78" width="8" height="13" rx="2" style="--d:0s;fill:#ff5d73"/>
+      <rect class="cf" x="130" y="74" width="9" height="9" rx="4" style="--d:.08s;fill:#ffb347"/>
+      <rect class="cf" x="148" y="70" width="7" height="14" rx="2" style="--d:.03s;fill:#4dd4ac"/>
+      <rect class="cf" x="166" y="74" width="9" height="9" rx="4" style="--d:.12s;fill:#6c8cff"/>
+      <rect class="cf" x="184" y="78" width="8" height="13" rx="2" style="--d:.05s;fill:#ffd23f"/>
+      <rect class="cf" x="122" y="68" width="7" height="11" rx="2" style="--d:.15s;fill:#6c8cff"/>
+      <rect class="cf" x="158" y="66" width="8" height="8" rx="4" style="--d:.1s;fill:#ff5d73"/>
+      <rect class="cf" x="176" y="68" width="7" height="12" rx="2" style="--d:.18s;fill:#4dd4ac"/>
+      <text class="gb-star" x="52" y="72" style="animation-delay:0s">✦</text>
+      <text class="gb-star" x="232" y="96" style="animation-delay:.5s">★</text>
+      <text class="gb-star" x="70" y="140" style="animation-delay:1s">★</text>
+      <text class="gb-star" x="222" y="46" style="animation-delay:.8s">✦</text>
+    </svg>
+  </div>
+
+  <div class="joy" id="joy"></div>
+
+  <div class="card">
+    <div class="chips" id="g_mode" style="margin-bottom:6px"></div>
+    <label>Who is it for?</label>
+    <div class="chips" id="rel"></div>
+
+    <label>Their gender <span class="hint">(optional, helps us pick better)</span></label>
+    <div class="chips" id="g_gender"></div>
+
+    <div class="row">
+      <div><label>Their age <span class="hint">(roughly)</span></label><input id="age" type="number" min="1" max="110" placeholder="e.g. 22"></div>
+      <div><label>Occasion</label>
+        <select id="occ"><option>Birthday</option><option>Anniversary</option><option>Wedding</option><option>Festival (Diwali, Rakhi, Eid…)</option><option>Graduation</option><option>Farewell</option><option>Just because</option><option>Apology</option></select></div>
+    </div>
+
+    <div id="gA">
+    <div class="row">
+      <div><label>Budget (₹)</label><input id="bud" type="number" min="50" step="50" placeholder="e.g. 1500"></div>
+      <div><label>Gift vibe</label>
+        <select id="vibe"><option>Thoughtful &amp; personal</option><option>Practical &amp; useful</option><option>Funny &amp; quirky</option><option>Luxurious</option><option>DIY / handmade</option></select></div>
+    </div>
+    </div>
+
+    <label>Their favourite colour <span class="hint">(pick one or more, it colours the note too)</span></label>
+    <div class="chips" id="g_fcolor"></div>
+
+    <label>What are they into? <span class="hint">(tap any)</span></label>
+    <div class="chips" id="g_fan"></div>
+
+    <label>Favourite show, anime, cartoon, singer or character <span class="hint">(optional, we’ll sneak a reference into the note)</span></label>
+    <input id="nFav" placeholder="e.g. Studio Ghibli, Arijit Singh, Doraemon">
+
+    <div id="gB">
+    <label>Gift types you’d like to see <span class="hint">(optional, tap any)</span></label>
+    <div class="chips" id="g_types"></div>
+
+    <div class="qhead"><span class="qtitle">Today’s questions</span><button type="button" class="shuf" id="shuf">🔀 New questions</button></div>
+    <div id="qs"></div>
+
+    <label>Not their thing <span class="hint">(we’ll avoid these)</span></label>
+    <div class="chips" id="g_dis"></div>
+
+    <label>Anything else they love? <span class="hint">(optional)</span></label>
+    <textarea id="likes" placeholder="Optional: e.g. loves filter coffee, always cold"></textarea>
+
+    <label>Already owns or hates something specific? <span class="hint">(optional)</span></label>
+    <textarea id="dislikes" placeholder="Optional: e.g. already owns a Kindle"></textarea>
+    </div>
+
+    <button type="button" class="note-toggle" id="nTog">✍️ Add a personal note to go with the gift</button>
+    <div id="nPanel" hidden>
+      <p class="hint">We’ll write a short, personal note for them that you can print and tuck into the gift. Just a few taps:</p>
+      <div class="row">
+        <div><label>Your name <span class="hint">(optional)</span></label><input id="nFrom" placeholder="e.g. Riya"></div>
+        <div><label>Their name <span class="hint">(optional)</span></label><input id="nTo" placeholder="e.g. Aarav"></div>
+      </div>
+      <label>Note vibe</label>
+      <div class="chips" id="g_tone"></div>
+      <label>Funny things they always do <span class="hint">(tap all that apply)</span></label>
+      <div class="chips" id="g_nhab"></div>
+      <label>What you love most about them <span class="hint">(tap all that apply)</span></label>
+      <div class="chips" id="g_nlove"></div>
+      <label>A memory or inside joke <span class="hint">(optional)</span></label>
+      <input id="nMem" placeholder="e.g. that rainy-day chai trip">
+    </div>
+
+    <button class="go" id="go">Find gift ideas ✨</button>
+  </div>
+
+  <div id="out"></div>
+
+  <div class="card human">
+    <h2>Want a human-written note or poem? ✍️</h2>
+    <p class="hint">A real person writes it, just for them. From ₹49. Coming soon: build your request now so it’s ready.</p>
+    <div class="row">
+      <div><label>What should it be?</label><select id="hType"><option>Short note</option><option>Poem</option></select></div>
+      <div><label>Language</label><select id="hLang"><option>English</option><option>Hindi</option><option>Hinglish</option></select></div>
+    </div>
+    <label>Tell the writer about them <span class="hint">(inside jokes, memories, what they mean to you)</span></label>
+    <textarea id="hAbout" placeholder="e.g. we met on the first day of college and still argue about chai vs coffee"></textarea>
+    <button class="go" id="hBtn" type="button">Prepare my request</button>
+    <textarea id="hOut" readonly hidden></textarea>
+  </div>
+</div>
+
+<script>
+var rels=["Friend","Best friend","Partner","Crush","Mom","Dad","Sibling","Grandparent","Kid","Relative","Colleague","Boss","Teacher","Mentor","Neighbour"];
+var relSel="Friend";
+var relBox=document.getElementById("rel");
+function drawRel(){
+  relBox.innerHTML="";
+  rels.forEach(function(r){
+    var b=document.createElement("button");
+    b.type="button";b.className="chip"+(r===relSel?" on":"");b.textContent=r;
+    b.onclick=function(){relSel=r;drawRel()};
+    relBox.appendChild(b);
+  });
+}
+drawRel();
+
+var P={color:[],habit:[],use:[],trait:[],dis:[]};
+var OPTS={
+  color:["Red","Pink","Orange","Yellow","Green","Blue","Purple","Black","White","Pastels","Earthy tones"],
+  habit:["Reading","Listening to music","Gaming","Cooking or baking","Travelling","Working out","Binge-watching shows","Drawing or art","Photography","Gardening","Writing","Scrolling social media","Dancing","Journaling"],
+  use:["Phone","Laptop","Headphones","Water bottle","Backpack or bag","Coffee or tea mug","Watch","Notebook","Sneakers","Skincare or makeup","Camera","Kitchen gadgets"],
+  trait:["Homebody","Adventurer","Foodie","Neat freak","Dreamer","Techie","Fashionable","Funny","Fitness lover","Always busy"],
+  dis:["Clutter","Strong perfumes","Sweets","Gadgets","Clothes","Decor items","Alcohol","Anything flashy","Plants","Books"]
+};
+function drawGroup(k){
+  var box=document.getElementById("g_"+k);if(!box)return;box.innerHTML="";
+  OPTS[k].forEach(function(o){
+    var b=document.createElement("button");
+    b.type="button";b.className="chip"+(P[k].indexOf(o)>-1?" on":"");b.textContent=o;
+    b.onclick=function(){var i=P[k].indexOf(o);if(i>-1)P[k].splice(i,1);else P[k].push(o);drawGroup(k);applyTheme()};
+    box.appendChild(b);
+  });
+}
+OPTS.nhab=['Oversleeps','Quotes movies','Overthinks everything','Always late','Raids the snack stash','Sings in the shower','Laughs at own jokes','Talks to their pet','Loses their phone','Gives great advice','Dances randomly','Always hungry'];
+OPTS.nlove=['Their laugh','Their kindness','Their humour','Always being there','Their creativity','Their energy','Their honesty','How they care'];
+P.nhab=[];P.nlove=[];
+OPTS.types=['Crockery & cups','Squishies & plush','Self-care','Tech & gadgets','Fashion & accessories','Stationery & books','Food & treats','Experiences','DIY kits'];P.types=[];
+var COLORMAP={Red:['#ffb3ba','#ff6b6b'],Pink:['#ffd1e8','#ff9ecf'],Orange:['#ffe0b5','#ffb347'],Yellow:['#fff6a8','#ffd93d'],Green:['#d4ffc9','#7fdc9a'],Teal:['#c3fbf0','#5fd1c4'],Blue:['#cfe6ff','#7fb3ff'],Purple:['#e5d4ff','#b08cff'],Lavender:['#f0e6ff','#cdb8ff'],Black:['#d9d9e3','#8d8da3'],White:['#ffffff','#e8e8f0'],Brown:['#f3dcc4','#c89b72'],Pastels:['#ffd6e0','#c9f2ff'],Neon:['#c8ff6b','#ff6bf0'],Earthy:['#ecd9b8','#a9c28a']};
+OPTS.fcolor=Object.keys(COLORMAP);P.fcolor=[];
+OPTS.fan=['Studio Ghibli','Anime','Cartoons','K-pop','Bollywood music','Indie / lo-fi','Hip-hop','Rock','Art & doodling','Fantasy shows','Crime thrillers','K-dramas','Rom-coms','Gaming','Cricket'];P.fan=[];
+var mode='gift';
+function drawMode(){
+  var box=document.getElementById('g_mode');box.innerHTML='';
+  [['gift','🎁 Find a gift'],['note','💌 Just a cute note']].forEach(function(m){
+    var b=document.createElement('button');
+    b.type='button';b.className='chip'+(m[0]===mode?' on':'');b.textContent=m[1];
+    b.onclick=function(){setMode(m[0])};
+    box.appendChild(b);
+  });
+}
+function setMode(m){
+  mode=m;drawMode();var n=m==='note';
+  document.getElementById('gA').hidden=n;document.getElementById('gB').hidden=n;document.getElementById('nTog').hidden=n;
+  document.getElementById('nPanel').hidden=!(n||noteOn);
+  document.getElementById('go').textContent=n?'Write my cute notes 💌':'Find gift ideas ✨';
+  out.innerHTML='';
+}
+drawMode();
+var JOY=['Text someone a memory you share. Watch their day get better.','Drink a full glass of water, then do a tiny happy dance.','Compliment a stranger today. Just one.','Play the song you loved in school and sing badly on purpose.','Doodle your mood on a sticky note and hide it somewhere random.','Tell a friend one thing you secretly admire about them.','Put on your comfiest socks and call it self-care.','Write three tiny wins from this week. Tiny counts.','Send a meme with zero context to your favourite person.','Hum a song while doing chores. Nobody can stop you.','Eat the dessert first today.','Look at the sky for one full minute.','Tidy one small corner and enjoy the glow.','Learn one new word and use it today.'];
+document.getElementById('joy').innerHTML='<b>Tiny joy of the day</b>'+esc(JOY[Math.floor(Date.now()/864e5)%JOY.length]);
+var gender='';
+function drawGender(){
+  var box=document.getElementById('g_gender');box.innerHTML='';
+  ['Girl / Woman','Boy / Man','Non-binary','Prefer not to say'].forEach(function(t){
+    var b=document.createElement('button');
+    b.type='button';b.className='chip'+(t===gender?' on':'');b.textContent=t;
+    b.onclick=function(){gender=(gender===t?'':t);drawGender()};
+    box.appendChild(b);
+  });
+}
+drawGender();
+var BANK=[
+ {k:'habit',q:'What do they do on a free evening?'},
+ {k:'use',q:'What do they use almost every single day?'},
+ {k:'trait',q:'Which words describe them best?'},
+ {k:'snack',q:'Their 2 am snack of choice?',o:['Maggi','Chai and biscuits','Chocolate','Fruits','Chips','Leftovers','Ice cream','They sleep through it']},
+ {k:'weekend',q:'Their perfect free day?',o:['Sleeping in','Road trip','Movie marathon','Cafe hopping','Sports or gym','Hanging with friends','Making something','Exploring a new place']},
+ {k:'power',q:'Which superpower would they pick?',o:['Time travel','Invisibility','Teleporting','Mind reading','Flying','Talking to animals','Pausing time']},
+ {k:'wall',q:'Their phone wallpaper is…',o:['Nature','A pet','An aesthetic quote','Anime','A celebrity','Plain dark','Friends and family','A car or bike']},
+ {k:'room',q:'Their room is…',o:['Spotless','Creative chaos','Fairy lights everywhere','Full of books','Minimal','Full of plants','A gaming setup']},
+ {k:'watch',q:'Their comfort watch?',o:['Rom-coms','Thrillers','Anime','Comedy shows','Documentaries','K-dramas','Old classics','Cartoons']},
+ {k:'bag',q:'What is always in their bag?',o:['Earphones','Lip balm','Power bank','A book','Snacks','Perfume','Sunglasses','Random receipts']},
+ {k:'morning',q:'Their mornings are…',o:['Chai or coffee first','Ten snoozes','Workout time','Scrolling in bed','Always rushed','Calm and slow']},
+ {k:'trip',q:'Their dream holiday?',o:['Mountains','Beach','Old cities','Desert','Abroad','Jungle','A cosy staycation']},
+ {k:'learn',q:'Something new they’d love to learn?',o:['Guitar','Cooking','Photography','Coding','Dancing','A new language','Painting','Skating','Baking']},
+ {k:'style',q:'Their style is…',o:['Cosy hoodies','Smart casual','Traditional','Streetwear','Sporty','Vintage','Colourful chaos','All black']},
+ {k:'drink',q:'Their go-to drink?',o:['Chai','Cold coffee','Mocktails','Fresh juice','Milkshake','Green tea','Cola','Just water']},
+ {k:'party',q:'How do they like to celebrate?',o:['Big party','Quiet dinner','With family','Alone time','A little trip','No fuss at all']},
+ {k:'lakh',q:'If they won ₹1 lakh tomorrow, they would…',o:['Travel','Buy a gadget','Save it','Treat everyone','Start a business','Go shopping','Upgrade a hobby','Donate some']},
+ {k:'cartoon',q:'Which cartoon or anime did they grow up on?',o:['Doraemon and Shinchan','Pokémon','Chhota Bheem','Naruto and Dragon Ball','Tom and Jerry','Disney classics','Studio Ghibli','Cartoon Network','Anime right now']},
+ {k:'sound',q:'What would their life soundtrack sound like?',o:['Lo-fi beats','Retro Bollywood','Punjabi bangers','K-pop','Indie acoustic','Rock','Classical','Hip-hop','Devotional calm']},
+ {k:'artside',q:'If they took up art, it would be…',o:['Doodles','Watercolours','Digital art','Crochet or knitting','Pottery','Calligraphy','Graffiti','Photography','Sketching people']},
+ {k:'animal',q:'Their spirit animal?',o:['Lazy cat','Loyal dog','Panda','Owl','Fox','Penguin','Dolphin','Bunny']},
+ {k:'fest',q:'Their favourite festival feeling?',o:['Diwali lights','Holi colours','Eid sweets','Christmas cosiness','Navratri dance','Raksha Bandhan','New Year','Only their birthday']},
+ {k:'desk',q:'Their workspace vibe?',o:['Messy genius','Aesthetic desk','Cafe worker','Works from bed','Library lover','Night owl']},
+ {k:'peeve',q:'Their little pet peeve?',o:['Slow wifi','Cold food','Spoilers','Being late','Crowds','Low battery','Unread messages']},
+ {k:'story',q:'Their story taste?',o:['Romance','Fantasy','Mystery','Self-growth','Manga','Poetry','Horror','Comics','Mythology']},
+ {k:'sport',q:'Their sporty side?',o:['Cricket fan','Football','Badminton','Gym rat','Yoga','Cycling','Chess','Esports','Not at all']},
+ {k:'sweet',q:'Their dessert pick?',o:['Gulab jamun','Brownie','Ice cream','Rasmalai','Cheesecake','Jalebi','Fruit chaat','Cupcakes','Kulfi']}
+];
+var queue=[],shown=[];
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+BANK.forEach(function(q){if(q.o)OPTS[q.k]=q.o;P[q.k]=[]});
+function drawQs(){
+  var box=document.getElementById('qs');box.innerHTML='';
+  shown.forEach(function(q){
+    var l=document.createElement('label');
+    l.innerHTML=esc(q.q)+' <span class="hint">(tap all that apply)</span>';
+    var c=document.createElement('div');c.className='chips';c.id='g_'+q.k;
+    box.appendChild(l);box.appendChild(c);drawGroup(q.k);
+  });
+}
+function nextQs(){
+  if(queue.length<6){var rest=BANK.filter(function(q){return queue.indexOf(q)<0});queue=queue.concat(shuffle(rest.slice()))}
+  BANK.forEach(function(q){P[q.k]=[]});
+  shown=queue.splice(0,6);drawQs();
+}
+document.getElementById('shuf').onclick=nextQs;
+nextQs();
+Object.keys(OPTS).forEach(drawGroup);
+function dl(){var a=P.dis.slice();if($("dislikes"))a.push($("dislikes"));return a.join(", ")}
+
+var out=document.getElementById('out'),go=document.getElementById('go');
+var noteOn=false,tone='Sweet',LAST=[];
+var PAL=['linear-gradient(135deg,#ffd6e0,#ffb347)','linear-gradient(135deg,#c9f2ff,#b8a1ff)','linear-gradient(135deg,#d4ffb2,#ffe66d)','linear-gradient(135deg,#ffb3c6,#ffd166)','linear-gradient(135deg,#a0f0e0,#ffd1f0)'];
+var NOTE_CSS=`.nc{position:relative;width:min(100%,340px);min-height:190px;padding:18px 20px;border-radius:16px;border:3px solid #2a1f2d;box-shadow:5px 5px 0 #2a1f2d;font-family:'Caveat','Comic Sans MS',cursive;color:#2a1f2d;transform:rotate(-1.5deg);margin:14px 0 6px;display:flex;flex-direction:column;justify-content:space-between;box-sizing:border-box}
+.nc-top{display:flex;justify-content:space-between;align-items:center;font-size:22px;font-weight:700}
+.nc-st{font-size:30px}
+.nc-txt{font-size:24px;line-height:1.25;margin:8px 0;font-weight:600}
+.nc-from{text-align:right;font-size:24px;font-weight:700}
+.nc{overflow:hidden}
+.nc:before{content:'';position:absolute;top:-8px;left:50%;width:90px;height:22px;margin-left:-45px;background:rgba(255,255,255,.55);border:1.5px dashed rgba(42,31,45,.4);transform:rotate(-3deg)}
+.nc-doodle{position:absolute;right:12px;bottom:40px;width:44px;height:44px;opacity:.9}
+.nc-stamp{display:inline-block;align-self:flex-start;border:2px dashed #2a1f2d;border-radius:8px;padding:0 8px;font-size:19px;font-weight:700;transform:rotate(-3deg);background:rgba(255,255,255,.45);max-width:70%}`;
+var nst=document.createElement('style');nst.textContent=NOTE_CSS;document.head.appendChild(nst);
+function drawTone(){
+  var box=document.getElementById('g_tone');box.innerHTML='';
+  ['Sweet','Funny','Cheeky','Poetic'].forEach(function(t){
+    var b=document.createElement('button');
+    b.type='button';b.className='chip'+(t===tone?' on':'');b.textContent=t;
+    b.onclick=function(){tone=t;drawTone()};
+    box.appendChild(b);
+  });
+}
+drawTone();
+document.getElementById('nTog').onclick=function(){
+  noteOn=!noteOn;document.getElementById('nPanel').hidden=!noteOn;
+  this.classList.toggle('on',noteOn);
+  this.textContent=noteOn?'✍️ Personal note ON (tap to remove)':'✍️ Add a personal note to go with the gift';
+};
+function noteCard(g,i){
+  var st={Sweet:'💌',Funny:'😜',Cheeky:'😏',Poetic:'🌙'}[tone]||'💌';
+  var to=$('nTo'),fr=$('nFrom');
+  return '<div class="nc" style="background:'+bg(i)+'"><div class="nc-top"><span>'+(to?'Dear '+esc(to)+',':'Hey you,')+'</span><span class="nc-st">'+st+'</span></div><p class="nc-txt">'+esc(g.note)+'</p>'+doodle()+stamp()+'<div class="nc-from">'+(fr?'— '+esc(fr):'')+'</div></div>';
+}
+function noteBlock(g,i){
+  return '<div class="noteblk">'+noteCard(g,i)+'<div class="nhint">💡 Print it on a small slip (about 9 × 5 cm), fold it and tuck it into the wrapping, or tie it on with a ribbon.</div><button type="button" class="dlb" data-i="'+i+'">Download printable card ⬇</button></div>';
+}
+async function dlCard(i,btn){
+  var d=null;
+  try{d=await claude.use('downloads')}catch(e){}
+  if(!d){btn.textContent='Download not available here';return}
+  var html='<!DOCTYPE html><html><head><meta charset="utf-8"><title>Gift note</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&display=swap"><style>'+NOTE_CSS+'body{margin:20px;font-family:sans-serif}.nc{transform:none;width:9cm}.tip{font-size:12px;color:#666;max-width:9cm}@media print{.tip{display:none}}</style></head><body>'+noteCard(LAST[i],i)+'<p class="tip">Print at 100% scale, cut along the edge and tuck it into the gift.</p></body></html>';
+  try{await d.save({filename:'gift-note.html',data:html})}catch(e){}
+}
+function bg(i){
+  var c=P.fcolor.map(function(n){return COLORMAP[n]}).filter(Boolean);
+  if(!c.length)return PAL[i%PAL.length];
+  return 'linear-gradient(135deg,'+c[0][0]+','+(c[1]?c[1][1]:c[0][1])+')';
+}
+function stamp(){var f=$('nFav');return f?'<span class="nc-stamp">currently into: '+esc(f)+'</span>':''}
+function doodle(){
+  var f=(P.fan.join(' ')+' '+$('nFav')).toLowerCase(),d;
+  if(/music|k-pop|bollywood|hip|rock|lo-fi|indie|singer|song/.test(f))d='<path d="M18 34V10l18-4v24" fill="none"/><circle cx="14" cy="34" r="6"/><circle cx="32" cy="30" r="6"/>';
+  else if(/art|doodl|paint/.test(f))d='<path d="M8 40l4-12 20-20 8 8-20 20z"/><path d="M28 12l8 8" fill="none"/>';
+  else if(/anime|cartoon|ghibli|doraemon/.test(f))d='<path d="M24 4l5 13 14 1-11 9 4 14-12-8-12 8 4-14L5 18l14-1z"/>';
+  else if(/show|drama|thriller|film|movie|rom-com/.test(f))d='<rect x="6" y="18" width="36" height="22" rx="3"/><path d="M6 18l5-10 8 10 8-10 8 10 8-10" fill="none"/>';
+  else d='<path d="M24 40C6 28 8 12 18 12c4 0 6 3 6 5 0-2 2-5 6-5 10 0 12 16-6 28z"/>';
+  return '<svg class="nc-doodle" viewBox="0 0 48 48" stroke="#2a1f2d" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" fill="#fff">'+d+'</svg>';
+}
+async function genNotes(){
+  var sample=null;try{sample=await claude.use('sample')}catch(e){}
+  if(!sample){out.innerHTML='<div class="err">The AI helper isn’t available in this view. Open the page while signed in to claude.ai.</div>';return}
+  go.disabled=true;go.textContent='Writing…';out.innerHTML='<div class="msg">Dipping the pen in glitter… 💌</div>';
+  var p='Write 3 different cute notes, each exactly ONE short sentence (max 20 words), from '+($('nFrom')||'the sender')+' to '+($('nTo')||'the recipient')+' ('+relSel+(gender&&gender!=='Prefer not to say'?', '+gender:'')+'). Occasion or message: '+$('occ')+'. Tone: '+tone+'. Their quirks: '+(P.nhab.join(', ')||'none')+'. What the sender loves about them: '+(P.nlove.join(', ')||'not given')+'. Memory or inside joke: '+($('nMem')||'none')+'. Favourite colours: '+(P.fcolor.join(', ')||'unknown')+'. They are into: '+(P.fan.join(', ')||'none')+($('nFav')?'; favourites: '+$('nFav'):'')+'. Each note should sneak in one gentle reference to something they love (a theme, character vibe or title nod) without quoting lyrics or dialogue, and may mention their colour. No quotation marks, no emojis. Reply with ONLY valid JSON: {"gifts":[{"note":""},{"note":""},{"note":""}]}';
+  try{
+    var r=await sample(p,{cache:false});
+    LAST=(parse(r.text).gifts)||[];
+    out.innerHTML=LAST.map(function(g,i){return noteBlock(g,i)}).join('')||'<div class="err">Nothing came back. Try again.</div>';
+  }catch(e){out.innerHTML='<div class="err">Something went wrong. Please try again.</div>'}
+  go.disabled=false;go.textContent='Write my cute notes 💌';
+}
+document.getElementById('hBtn').onclick=function(){
+  var t='Human-written '+$('hType').toLowerCase()+' request ('+$('hLang')+')\nFor: '+($('nTo')||'(name)')+' | From: '+($('nFrom')||'(name)')+'\nRelationship: '+relSel+'\nAbout them: '+($('hAbout')||'(add details)')+'\nFavourite colours: '+(P.fcolor.join(', ')||'-')+'\nInto: '+(P.fan.join(', ')||'-')+($('nFav')?' / '+$('nFav'):'');
+  var o=document.getElementById('hOut');o.value=t;o.hidden=false;o.select();
+  try{navigator.clipboard.writeText(t)}catch(e){}
+  this.textContent='Request ready ✓';
+};
+function applyTheme(){
+  var t=(P.fan.join(' ')+' '+$('nFav')).toLowerCase();
+  document.body.classList.toggle('ghibli',/ghibli|totoro|spirited away|kiki|ponyo|howl|mononoke|laputa|nausicaa|arrietty/.test(t));
+}
+document.getElementById('nFav').oninput=applyTheme;
+out.onclick=function(e){
+  var b=e.target.closest&&e.target.closest('.dlb');
+  if(b)dlCard(+b.dataset.i,b);
+};
+function $(id){return document.getElementById(id).value.trim()}
+function esc(s){var d=document.createElement("div");d.textContent=String(s==null?"":s);return d.innerHTML}
+
+function parse(t){
+  t=String(t).replace(/```json|```/g,"").trim();
+  var a=t.indexOf("{"),b=t.lastIndexOf("}");
+  return JSON.parse(t.slice(a,b+1));
+}
+
+function render(data){
+  var list=(data&&data.gifts)||[];
+  if(!list.length){out.innerHTML='<div class="err">No ideas came back. Try adding a bit more detail.</div>';return}
+  LAST=list;out.innerHTML=list.map(function(g,i){
+    var q=encodeURIComponent(g.search||g.name);
+    return '<div class="card gift"><h3>'+esc(g.name)+'</h3>'+
+      '<span class="tag">'+esc(g.category||"Gift")+'</span><span class="price">about ₹'+esc(g.price_inr)+'</span>'+
+      '<p>'+esc(g.why)+'</p>'+(noteOn&&g.note?noteBlock(g,i):'')+
+      '<div class="links"><a target="_blank" rel="noopener" href="https://www.amazon.in/s?k='+q+'">Amazon.in ↗</a>'+
+      '<a target="_blank" rel="noopener" href="https://www.flipkart.com/search?q='+q+'">Flipkart ↗</a>'+
+      '<a target="_blank" rel="noopener" href="https://www.google.com/search?q='+q+'">Google ↗</a></div></div>';
+  }).join("");
+}
+
+go.onclick=async function(){
+  if(mode==='note')return genNotes();
+  var likes=[];
+  shown.forEach(function(q){if(P[q.k].length)likes.push(q.q+' '+P[q.k].join(', '))});
+  if(P.fcolor.length)likes.push('Favourite colours: '+P.fcolor.join(', '));
+  if(P.fan.length)likes.push('Into: '+P.fan.join(', '));
+  if($('nFav'))likes.push('Favourites: '+$('nFav'));
+  if($("likes"))likes.push("Other things they love: "+$("likes"));
+  if(!likes.length){out.innerHTML='<div class="err">Tap at least one thing about them first.</div>';return}
+  likes=likes.join("; ");
+  var sample=null;
+  try{sample=await claude.use("sample")}catch(e){}
+  if(!sample){out.innerHTML='<div class="err">The AI helper isn’t available in this view. Open the page while signed in to claude.ai.</div>';return}
+  go.disabled=true;go.textContent="Thinking up ideas…";
+  out.innerHTML='<div class="msg">Browsing the gift universe… 🎁</div>';
+  var LENSES=['an experience or activity they can do','a DIY kit or craft set','a quirky desk or room item','a tasty treat or food hamper','a gift that teaches a new skill','a class or subscription','a clever everyday upgrade','a game or puzzle','a wearable or accessory','a plant or garden item','a fun gadget','a cosy self-care item','a stationery or book set','something to enjoy together','cute crockery or a unique cup or tea set','a squishy, plush or fidget toy'];
+  var angles=shuffle(LENSES.slice()).slice(0,4);
+  var varietyRule='VARIETY RULES: Do NOT suggest photo frames, photo collages, photo books, scrapbooks, or anything printed with photos unless photography is one of their selected interests. Skip the obvious first ideas (plain boring mugs, cushions, lamps, name keychains, generic hampers). Make the 6 gifts come from clearly different categories, and include at least one idea of each of these angles: '+angles.join('; ')+'. Variety seed: '+Math.floor(Math.random()*99999)+'. ';
+  var typesRule=P.types.length?'GIFT TYPES REQUESTED: include at least one gift from each of these types, as long as it fits the budget: '+P.types.join(', ')+'. ':'Include at least one cute crockery or cup idea (quirky mug, tea set, glassware) and one squishy, plush or fidget-toy idea whenever the age and vibe suit it. ';
+  typesRule+='For crockery and cups suggest specific distinctive styles (for example a ceramic cat mug, a hand-painted cup and saucer set, a glass tumbler with a straw). For squishies suggest specific kinds (for example a mochi squishy, a giant fruit squishy, a stress-relief plush). Use their gender only to make suggestions fit better and avoid stereotypes. ';
+  var noteRule='';
+  if(noteOn){
+    noteRule='ALSO: add a field called note to every gift object. The note is a warm, personal note of exactly ONE short sentence (max 20 words) written by '+($('nFrom')||'the giver')+' to '+($('nTo')||'the recipient')+' in a '+tone+' tone. It will be tucked in with that specific gift, so mention the gift naturally. Weave in their quirks: '+(P.nhab.join(', ')||'none given')+'. What the giver loves about them: '+(P.nlove.join(', ')||'not given')+'. Memory or inside joke: '+($('nMem')||'none')+'. Their favourite colours: '+(P.fcolor.join(', ')||'unknown')+' (work the colour in naturally). They are into: '+(P.fan.join(', ')||'none given')+($('nFav')?'; favourites: '+$('nFav'):'')+'. The note must sneak in one cute, gentle reference to something they love (a theme, a character vibe or a title nod) without quoting lyrics or dialogue. Do not use quotation marks or emojis in the note. ';
+  }
+  var prompt="You are a thoughtful gift advisor for shoppers in India. Suggest exactly 6 distinct gift ideas.\n"+
+    "Recipient: "+relSel+(($("age"))?", about "+$("age")+" years old":"")+"\n"+
+    (gender&&gender!=='Prefer not to say'?"Gender: "+gender+"\n":"")+"Occasion: "+$("occ")+"\n"+
+    "Budget: "+($("bud")?"up to ₹"+$("bud"):"flexible")+"\n"+
+    "Desired vibe: "+$("vibe")+"\n"+
+    "They like: "+likes+"\n"+
+    "They dislike or already have: "+(dl()||"nothing specified")+"\n\n"+
+    varietyRule+typesRule+"Rules: Where relevant, choose colours they love and useful upgrades or accessories for things they use daily. NEVER suggest anything in the dislikes or things they already own. Stay within budget. Be specific (a type of product, not a vague category) and available in India. Mix safe and surprising ideas. In 'why', tie the gift to their likes in one or two warm sentences.\n"+
+    noteRule+"Reply with ONLY valid JSON, no markdown, in this shape: {\"gifts\":[{\"name\":\"\",\"category\":\"\",\"price_inr\":\"approx number\",\"why\":\"\",\"search\":\"short shopping search query\"}]}";
+  try{
+    var r=await sample(prompt,{cache:false});
+    render(parse(r.text));
+  }catch(e){
+    out.innerHTML='<div class="err">'+(e&&e.code==="not_granted"?"Permission was declined, so we can’t generate ideas.":"Something went wrong. Please try again.")+'</div>';
+  }
+  go.disabled=false;go.textContent="Find gift ideas ✨";
+};
+</script>
+</body>
+</html>
